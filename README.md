@@ -14,7 +14,7 @@ Importantly, this GitHub repository is **intentionally lightweight**. The traine
 - [Usage](#usage)
 - [Repository contents](#repository-contents)
 - [Reproducibility and extension](#reproducibility-and-extension)
-- [Limitations & Ethical considerations](#limitations-&-ethical-considerations)
+- [Ethical considerations](#ethical-considerations)
 
 
 ## System architecture
@@ -216,11 +216,6 @@ Hosting these artifacts on Hugging Face ensures efficient distribution, versioni
 
 This repository is intended to support reproducibility and further research. Users may fine-tune the model on additional data, evaluate it on new benchmarks, or integrate it into larger dialogue or triage systems. For full experimental details, including dataset composition, training configuration, and evaluation metrics, please refer to the associated thesis or technical report.
 
-## Limitations & Ethical considerations
+## Ethical considerations
 
 Although these models do not generate medical advice, incorrect classification may lead to inappropriate downstream handling of user queries. The FA-AraBERT classifiers perform intent classification only and do not provide medical advice, assess urgency, or guarantee correctness. According to our testing misclassifications may occur, so for real-world deployment, these models should be integrated into a broader safety-aware framework with additional validation mechanisms and, where appropriate, human oversight.
-
-
-
-Wolf, T. et al. Transformers: State-of-the-Art Natural Language Processing. arXiv:1910.03771.
-
