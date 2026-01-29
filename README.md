@@ -8,11 +8,12 @@ Importantly, this GitHub repository is **intentionally lightweight**. The traine
 
 ## Overview
 - [System architecture](#system-architecture)
-- [Models](#models)
-- [Experimental evaluation](#experimental-evaluation)
-- [Hugging Face models](#hugging-face-models)
+- [Model Description](#model-description)
+- [Dataset](#dataset)
+- [Training](#training)
+- [Hugging Face models and chatbot](#hugging-face-models-and-chatbot)
 - [Usage](#usage)
-- [Repository contents](#repository-contents)
+- [Files](#files)
 - [Reproducibility and extension](#reproducibility-and-extension)
 - [Ethical considerations](#ethical-considerations)
 
@@ -27,15 +28,13 @@ The FA-AraBERT classifiers operate as the first component of an end-to-end MSA F
 
 Conceptually, the pipeline follows the sequence: User Query → FA-AraBERT Classifier → First-Aid LLM (if applicable) → Generated Response.
 
-## Models
 
-The project evaluates two AraBERT-based classifiers :
+## Model Description
 
-* [FA-AraBERTv0.2](https://huggingface.co/imaneumabderahmane/Arabertv02-classifier-FA) is built on AraBERTv0.2-base, which processes raw Arabic text directly without morphological pre-segmentation, relying solely on WordPiece tokenization.
-
-* [FA-AraBERTv2](https://huggingface.co/imaneumabderahmane/Arabertv2-classifier-FA) is built on AraBERTv2-base and requires an explicit preprocessing step based on the Farasa segmenter to ensure consistency with its pre-training configuration.
-
-Both models were fine-tuned for binary sequence classification to distinguish first-aid related queries from non–first-aid queries. For both classifiers, the labeling scheme was as follows:
+* Base model: **AraBERT**
+* Task: Binary text classification
+* Language: Arabic
+* Labels:
 
 <table align="center">
   <tr>
@@ -51,20 +50,17 @@ Both models were fine-tuned for binary sequence classification to distinguish fi
     <td>First aid case (FA)</td>
   </tr>
 </table>
+<p align=center>Table 1 : Classification labels</p>
 
-## Experimental evaluation
+The project evaluates two AraBERT-based classifiers :
 
-The evaluation focuses on two main components of the chatbot architecture. The first is the FA-AraBERT classifiers, assessed on their ability to classify queries as first-aid related or not. The second is the large language model responsible for generating responses, evaluated separately using BERTScore.
+* [FA-AraBERTv0.2](https://huggingface.co/imaneumabderahmane/Arabertv02-classifier-FA) is built on AraBERTv0.2-base, which processes raw Arabic text directly without morphological pre-segmentation, relying solely on WordPiece tokenization.
 
-The repository provides a detailed description of the methodology and reports the results of the classifiers :
+* [FA-AraBERTv2](https://huggingface.co/imaneumabderahmane/Arabertv2-classifier-FA) is built on AraBERTv2-base and requires an explicit preprocessing step based on the Farasa segmenter to ensure consistency with its pre-training configuration.
 
-### Evaluation metrics
+Both models were fine-tuned for binary sequence classification to distinguish first-aid related queries from non–first-aid queries.
 
-Classification performance was measured using the Macro F1 score, which computes the unweighted mean of class-wise F1 scores and is particularly appropriate for imbalanced datasets.
-
-Response generation quality was evaluated using BERTScore, a semantic similarity metric based on contextual embeddings that correlates well with human judgments.
-
-### Dataset and setup
+## Dataset
 
 The FA-AraBERT classifiers were trained and evaluated on the FALAH-Mix dataset, which contains 1,028 Arabic question–answer pairs. The dataset exhibits a strong class imbalance, with approximately 90% non–first-aid queries and 10% first-aid queries. The data were split into training, development, and test sets while preserving the original class distribution.
 
@@ -114,11 +110,24 @@ To mitigate class imbalance, the training set was augmented with additional firs
 </table>
 <p align=center><i>Table 2 : Distribution of QA pairs after balancing the FALAH-Mix training set</i></p>
 
+
+## Training
+
+The models were fine-tuned using supervised learning with the following configuration:
+
+* Optimizer: AdamW
+* Learning rate: 3 × 10⁻⁵
+* Batch size: 16
+* Epochs: 3
+* Loss function: Cross-entropy
+* Mixed-precision training enabled
+
+**Evaluation metrics:**
+
+* **Macro F1-score**, chosen to account for class imbalance
+* **BERTScore** for downstream response generation evaluation by the LLM, measures semantic similarity between generated responses and reference answers
+
 Experiments were conducted on [Google Colab](https://colab.research.google.com/drive/1em7S-Gk9AGW4HyLYAHQGBTG7BkN29dYc?usp=sharing) using A100 and T4 GPUs. All models were implemented using the Hugging Face Transformers library.
-
-### Training configuration
-
-Both classifiers were trained using the AdamW optimizer with a learning rate of 3 × 10⁻⁵, a batch size of 16, and three training epochs. Class weighting and data balancing strategies were explored independently and in combination. Mixed-precision training was enabled to improve computational efficiency.
 
 ### Results
 
@@ -155,13 +164,22 @@ Table 3 summarizes the Macro F1 scores obtained by FA-AraBERTv2 and FA-AraBERTv0
 
 The best performance was achieved when fine-tuning on the balanced FALAH-Mix training set with class weighting. **FA-AraBERTv2** achieved a Macro F1 score of **0.6379**, slightly outperforming FA-AraBERTv0.2. Due to this consistent advantage, FA-AraBERTv2 was selected for deployment in the final chatbot system.
 
-## Hugging Face models
+## Hugging Face Models and Chatbot
 
 The trained models and tokenizer files are available on the Hugging Face Model Hub:
 
 * [FA-AraBERTv2](https://huggingface.co/imaneumabderahmane/Arabertv2-classifier-FA)
 * [FA-AraBERTv0.2](https://huggingface.co/imaneumabderahmane/Arabertv02-classifier-FA)
 
+First-Aid Chatbot (Deployed Space)
+
+An interactive Arabic first-aid chatbot integrating FA-AraBERT as the intent detection module:
+
+- [Hugging Face Space](https://huggingface.co/spaces/khaoula1972/Strm-firstaid)
+- [GitHub repository](https://github.com/khaoula1972/first-aid-chatbot)
+- [Vercel deployment](https://first-aid-chatbot.vercel.app/)
+
+The chatbot routes first-aid queries through FA-AraBERT for classification. If the classifier misclassifies a query, the Mistral LLM acts as a “parent” classifier to reclassify or correct the query before generating a response. This ensures higher accuracy and reduces false positives/negatives in the pipeline.
 
 ## Usage
 
@@ -187,7 +205,7 @@ print(prediction)
 ```
 Label mappings are defined in the model configuration file on Hugging Face.
 
-## Repository contents
+## Files
 
 This repository contains only lightweight files required for documentation and reproducibility:
 
@@ -219,3 +237,7 @@ This repository is intended to support reproducibility and further research. Use
 ## Ethical considerations
 
 Although these models do not generate medical advice, incorrect classification may lead to inappropriate downstream handling of user queries. The FA-AraBERT classifiers perform intent classification only and do not provide medical advice, assess urgency, or guarantee correctness. According to our testing misclassifications may occur, so for real-world deployment, these models should be integrated into a broader safety-aware framework with additional validation mechanisms and, where appropriate, human oversight.
+
+**This model is intended for research and educational purposes only.**
+
+**It is not a medical device and must not be used as a substitute for professional medical advice or emergency services.**
