@@ -205,43 +205,7 @@ print(prediction)
 ```
 Label mappings are defined in the model configuration file on Hugging Face.
 
-You can also deploy a lightweight web interface using **Gradio** for interactive query classification. This allows users to type queries in a browser and see instant predictions.
-
-```python
-import gradio as gr
-import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-
-# Load model and tokenizer
-model_name = "imaneumabderahmane/Arabertv2-classifier-FA"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSequenceClassification.from_pretrained(model_name)
-
-# Define prediction function
-def predict_first_aid(query):
-    """
-    Classifies a query as FIRST_AID or NOT_FIRST_AID.
-    """
-    encoded_input = tokenizer(query, return_tensors="pt", truncation=True)
-    with torch.no_grad():
-        outputs = model(**encoded_input)
-    logits = outputs.logits
-    predicted_class_id = logits.argmax().item()
-    predicted_label = model.config.id2label[predicted_class_id]
-    return predicted_label
-
-# Create Gradio interface
-interface = gr.Interface(
-    fn=predict_first_aid,
-    inputs=gr.Textbox(label="Enter your query"),
-    outputs=gr.Textbox(label="Predicted Label"),
-    title="Arabic First-Aid Query Classifier",
-    description="Type any Arabic query to see if it is related to first aid."
-)
-
-# Launch interface
-interface.launch()
-```
+You can also deploy a lightweight web interface using **Gradio** (UI_gradio.py) for interactive query classification. This allows users to type queries in a browser and see instant predictions.
 
 * After running, Gradio provides a **temporary web link** (or local URL) where you can enter queries.
 * Example query:
