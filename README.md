@@ -238,6 +238,6 @@ This repository is intended to support reproducibility and further research. Use
 
 Although these models do not generate medical advice, incorrect classification may lead to inappropriate downstream handling of user queries. The FA-AraBERT classifiers perform intent classification only and do not provide medical advice, assess urgency, or guarantee correctness. According to our testing misclassifications may occur, so for real-world deployment, these models should be integrated into a broader safety-aware framework with additional validation mechanisms and, where appropriate, human oversight.
 
-**This model is intended for research and educational purposes only.**
+**Disclaimer: This model is intended for research and educational purposes only.**
 
 **It is not a medical device and must not be used as a substitute for professional medical advice or emergency services.**
