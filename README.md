@@ -171,7 +171,7 @@ The trained models and tokenizer files are available on the Hugging Face Model H
 * [FA-AraBERTv2](https://huggingface.co/imaneumabderahmane/Arabertv2-classifier-FA)
 * [FA-AraBERTv0.2](https://huggingface.co/imaneumabderahmane/Arabertv02-classifier-FA)
 
-* First-Aid Chatbot
+- First-Aid Chatbot
 
 An interactive Arabic first-aid chatbot integrating FA-AraBERT as the intent detection module:
 
