@@ -220,8 +220,9 @@ You can also deploy a lightweight web interface using **Gradio** (UI_gradio.py) 
 LABEL_1
 ```
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/a0f2dd36-3fc9-45a8-8eb7-91045c6b1915" width="300">
+  <img width="534" height="293" alt="image" src="https://github.com/user-attachments/assets/83c45b5e-6de3-4358-9687-9ffed3880129" />
 </p>
+
 
 
 > This Gradio deployment can serve as a quick **demo**, **testing interface**, or lightweight **web app** for the FA-AraBERT classifiers.
