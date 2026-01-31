@@ -171,7 +171,7 @@ The trained models and tokenizer files are available on the Hugging Face Model H
 * [FA-AraBERTv2](https://huggingface.co/imaneumabderahmane/Arabertv2-classifier-FA)
 * [FA-AraBERTv0.2](https://huggingface.co/imaneumabderahmane/Arabertv02-classifier-FA)
 
-- First-Aid Chatbot
+**First-Aid Chatbot**
 
 An interactive Arabic first-aid chatbot integrating FA-AraBERT as the intent detection module:
 
@@ -219,6 +219,10 @@ You can also deploy a lightweight web interface using **Gradio** (UI_gradio.py) 
 ```
 LABEL_1
 ```
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a0f2dd36-3fc9-45a8-8eb7-91045c6b1915" width="300">
+</p>
+
 
 > This Gradio deployment can serve as a quick **demo**, **testing interface**, or lightweight **web app** for the FA-AraBERT classifiers.
 
