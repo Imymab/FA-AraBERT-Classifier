@@ -1,8 +1,8 @@
-# FA-AraBERT: Arabic First-Aid Query Classifier
+# FA-AraBERT: First-Aid AraBERT Classifier
 
-This repository provides the code, documentation, and usage examples associated with **FA-AraBERT**, an Arabic binary text classification model designed to detect whether a user query is related to first aid. The classifier constitutes the intent detection and safety filtering component of an MSA First-Aid Chatbot pipeline.
+This repository provides the code, documentation, and usage examples associated with **FA-AraBERT**, an Arabic binary text classification model designed to detect whether a user query is related to first-aid. The classifier constitutes the intent detection and safety filtering component of an MSA First-Aid Chatbot pipeline.
 
-Two models are provided and evaluated in this project: **FA-AraBERTv2** and **FA-AraBERTv0.2**, both fine-tuned from AraBERT base models. These classifiers were systematically compared under multiple training configurations in order to select the most suitable model for deployment.
+Two models are provided and evaluated in this project: **FA-AraBERTv2** and **FA-AraBERTv0.2**, both fine-tuned on FALAH-Mix dataset from AraBERT base models. These classifiers were systematically compared under multiple training configurations in order to select the most suitable model for deployment.
 
 Importantly, this GitHub repository is **intentionally lightweight**. The trained model weights (≈500 MB) and tokenizer artifacts are hosted on the Hugging Face Model Hub, which is the recommended platform for distributing large pretrained models.
 
