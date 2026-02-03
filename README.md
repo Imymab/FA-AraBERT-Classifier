@@ -24,7 +24,7 @@ Importantly, this GitHub repository is **intentionally lightweight**. The traine
 <img width="528" height="275" alt="Chatbot structure" src="https://github.com/user-attachments/assets/cb58f77d-27ab-47e8-b6e7-bb5749499a4c" align="middle" /></p>
 <p align=center><i>Overview of the Chatbot System Architecture</i></p>
 
-The FA-AraBERT classifiers operate as the first component of an end-to-end MSA First-Aid Chatbot. A user query is first processed by the FA-AraBERT classifier to determine whether it is related to first aid. If the query is classified as first-aid related, it is forwarded to a large language model responsible for response generation. Otherwise, the system returns a warning indicating that the query falls outside the chatbot’s scope.
+The FA-AraBERT classifiers operate as the first component of an end-to-end MSA First-Aid Chatbot. A user query is first processed by the FA-AraBERT classifier to determine whether it is related to first-aid. If the query is classified as first-aid related, it is forwarded to a large language model responsible for response generation. Otherwise, the system returns a warning indicating that the query falls outside the chatbot’s scope.
 
 Conceptually, the pipeline follows the sequence: User Query → FA-AraBERT Classifier → First-Aid LLM (if applicable) → Generated Response.
 
@@ -58,13 +58,13 @@ The project evaluates two AraBERT-based classifiers :
 
 * [FA-AraBERTv2](https://huggingface.co/imaneumabderahmane/Arabertv2-classifier-FA) is built on AraBERTv2-base and requires an explicit preprocessing step based on the Farasa segmenter to ensure consistency with its pre-training configuration.
 
-Both models were fine-tuned for binary sequence classification to distinguish first-aid related queries from non–first-aid queries.
+Both models were fine-tuned for binary sequence classification to distinguish first-aid related queries from non first-aid queries.
 
 ## Dataset
 
-The FA-AraBERT classifiers were trained and evaluated on the FALAH-Mix dataset, which contains 1,028 Arabic question–answer pairs. The dataset exhibits a strong class imbalance, with approximately 90% non–first-aid queries and 10% first-aid queries. The data were split into training, development, and test sets while preserving the original class distribution.
+The FA-AraBERT classifiers were trained and evaluated on the FALAH-Mix dataset, which contains 1,028 Arabic question–answer pairs. The dataset exhibits a strong class imbalance, with approximately 90% non first-aid queries and 10% first-aid queries. The data were split into training, development, and test sets while preserving the original class distribution.
 
-To mitigate class imbalance, the training set was augmented with additional first-aid samples from external datasets, including the Mayo Clinic First Aid dataset and the AHD dataset. This resulted in a balanced training set of 1,184 samples, while the development and test sets remained unchanged.
+To mitigate class imbalance, the training set was augmented with additional first-aid samples from external datasets, including the Mayo Clinic First-Aid dataset and the AHD dataset. This resulted in a balanced training set of 1,184 samples, while the development and test sets remained unchanged.
 
 <table border="1" align="center">
   <tr>
