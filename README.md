@@ -43,11 +43,11 @@ Conceptually, the pipeline follows the sequence: User Query → FA-AraBERT Class
   </tr>
   <tr>
     <td>LABEL_0</td>
-    <td>Non first aid case (NFA)</td>
+    <td>Non first-aid case (NFA)</td>
   </tr>
   <tr>
     <td>LABEL_1</td>
-    <td>First aid case (FA)</td>
+    <td>First-aid case (FA)</td>
   </tr>
 </table>
 <p align=center>Table 1 : Classification labels</p>
@@ -140,22 +140,42 @@ Table 3 summarizes the Macro F1 scores obtained by FA-AraBERTv2 and FA-AraBERTv0
     <th>FA-AraBERTv0.2</th>
   </tr>
   <tr>
-    <td>Baseline few-shot</td>
+    <td>Few-shots from the FALAH-Mix training set</td>
     <td>0.4728</td>
     <td>0.4728</td>
   </tr>
   <tr>
-    <td>Balanced training</td>
+    <td>Few-shots from the FALAH-Mix training set with class weights</td>
+    <td>0.4861</td>
+    <td>0.48</td>
+  </tr>
+  <tr>
+    <td>Few-shots from the balanced FALAH-Mix training set</td>
+    <td>0.5491</td>
+    <td>0.5612</td>
+  </tr>
+  <tr>
+    <td>Few-shots from the balanced FALAH-Mix training set with class weights</td>
     <td>0.5588</td>
     <td>0.5578</td>
-  </tr>
+  </tr> 
   <tr>
-    <td>Fine-tuning (imbalanced)</td>
+    <td>Fine-tuning using the FALAH-Mix training set</td>
     <td>0.5453</td>
     <td>0.5634</td>
   </tr>
   <tr>
-    <td>Balanced fine-tuning + class weights</td>
+    <td>Fine-tuning using the FALAH-Mix training set with class weights</td>
+    <td>0.5890</td>
+    <td>0.5922</td>
+  </tr>
+ <tr>
+    <td>Fine-tuning using the balanced FALAH-Mix training set</td>
+    <td>0.5852</td>
+    <td>0.5958</td>
+  </tr>
+ <tr>
+    <td>Fine-tuning using the balanced FALAH-Mix training set with class weights</td>
     <td>0.6379</td>
     <td>0.6361</td>
   </tr>
